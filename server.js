@@ -139,7 +139,7 @@ function langCodeMap(code) {
 }
 
 // ---------------------- Weather Function ----------------------
-async function weatherHandler(languageCode) {
+function weatherHandler(languageCode) {
   return async (req, res) => {
     const twiml = new VoiceResponse();
     const zip = req.body.Digits;
@@ -238,25 +238,25 @@ function soilChoiceHandler(languageCode) {
 // ---------------------- Routes ----------------------
 // English
 app.post("/english-main", mainMenu("en"));
-app.post("/english-weather", weatherHandler("en"));
+app.post("/english-weather", (req, res) => weatherHandler("en")(req, res));
 app.post("/english-crop-choice", cropChoiceHandler("en"));
 app.post("/english-soil-choice", soilChoiceHandler("en"));
 
 // Hindi
 app.post("/hindi-main", mainMenu("hi"));
-app.post("/hindi-weather", weatherHandler("hi"));
+app.post("/hindi-weather", (req, res) => weatherHandler("hi")(req, res));
 app.post("/hindi-crop-choice", cropChoiceHandler("hi"));
 app.post("/hindi-soil-choice", soilChoiceHandler("hi"));
 
 // Telugu
 app.post("/telugu-main", mainMenu("te"));
-app.post("/telugu-weather", weatherHandler("te"));
+app.post("/telugu-weather", (req, res) => weatherHandler("te")(req, res));
 app.post("/telugu-crop-choice", cropChoiceHandler("te"));
 app.post("/telugu-soil-choice", soilChoiceHandler("te"));
 
 // Marathi
 app.post("/marathi-main", mainMenu("mr"));
-app.post("/marathi-weather", weatherHandler("mr"));
+app.post("/marathi-weather", (req, res) => weatherHandler("mr")(req, res));
 app.post("/marathi-crop-choice", cropChoiceHandler("mr"));
 app.post("/marathi-soil-choice", soilChoiceHandler("mr"));
 
